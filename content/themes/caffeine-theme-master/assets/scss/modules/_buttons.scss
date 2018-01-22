@@ -1,0 +1,159 @@
+img,
+.btn {
+    &.square {
+        border-radius: 0;
+    }
+    &.rounded {
+        border-radius: 50%;
+    }
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 20px;
+    text-shadow: none;
+
+    &:hover {
+        color: darken($primary-color, 15%);
+        border-color: darken($primary-color, 15%);
+    }
+
+    &.small {
+        padding: 8px 12px;
+        font-size: 10px;
+    }
+
+    &.large {
+        padding: 10px 24px;
+        font-size: 16px;
+    }
+
+    &.secondary {
+        color: $secondary-color;
+        border-color: $secondary-color;
+
+        &:hover {
+            color: darken($secondary-color, 15%);
+            border-color: darken($secondary-color, 15%);
+        }
+    }
+}
+
+.card {
+    width: 48%;
+    margin: 0 1% 20px;
+    cursor: pointer;
+    background: white;
+
+    .card-content {
+        padding: 10px 30px 20px;
+    }
+
+    .card-footer {
+        padding: 12px 30px;
+        border-top: 1px solid $gray-light;
+
+        .meta {
+            float: left;
+            margin: 0;
+        }
+
+        .share {
+            float: right;
+        }
+    }
+
+    @include transition(all 250ms);
+    @include shadow(2);
+
+    &:hover {
+        @include shadow(3);
+        -webkit-transform: translateY(-5px) !important;
+        transform: translateY(-5px) !important;
+    }
+}
+
+ul {
+    &.share-buttons {
+        margin: 0;
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin: 0;
+            display: inline-block;
+
+            a {
+                color: rgba($primary-color, .7);
+                &:hover {
+                    color: rgba($primary-color, 1);
+                }
+            }
+
+            i {
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+.social {
+    margin: 0;
+    &.item {
+        display: inline-block;
+        margin: 0 4px 0 0;
+        line-height: 16px;
+        a {
+            padding: 6px 8px 6px 9px;
+            @include btn-cover;
+            .label {
+                display: none;
+            }
+            i {
+                display: block;
+                font-size: 24px;
+            }
+            &:hover {
+                color: $hover-color;
+            }
+        }
+    }
+}
+
+.tags {
+    a {
+        @extend .animated;
+
+        padding: 2px 4px;
+        font-size: 8px;
+        text-transform: uppercase;
+        color: $gray-lightest;
+        border-radius: 4px;
+        background-color: rgba($primary-color, .7);
+        &:hover {
+            background-color: rgba($primary-color, 1);
+        }
+    }
+}
+
+.back-button {
+    font-size: 20px;
+    padding: 20px;
+    background: $primary-color;
+    position: absolute;
+    border-radius: 50%;
+    margin-top: -40px;
+    margin-left: 20px;
+    z-index: 10;
+
+    i {
+        color: white;
+    }
+    @include shadow(2);
+}

@@ -1,0 +1,42 @@
+.tags-overlay {
+    position: fixed;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    opacity: 0;
+    background: $midnight-blue;
+
+    &.show {
+        opacity: .97;
+        z-index: 5;
+    }
+
+    &.container {
+        font-weight: $font-weight-thin;
+        text-align: center;
+        color: $gray-lightest;
+        @include font-shadow;
+    }
+
+    .tags-container {
+        h2 {
+            color: $slate-white;
+        }
+
+        .tags {
+            a {
+                display: inline-block;
+                padding: 8px 14px;
+                margin: 5px;
+                font-size: 12px;
+                background-color: rgba($brown, .7);
+
+                &:hover {
+                    background-color: rgba($brown, 1);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "postgres": {
+    "host": "127.0.0.1",
+    "user": "travis",
+    "password": "",
+    "database": "travis_ci_test",
+    "charset": "utf8"
+  },
+  "sqlite": {
+    "filename": "express-brute-knex-test.sqlite"
+  },
+  "mysql": {
+    "host": "localhost",
+    "user": "travis",
+    "password": "",
+    "database": "travis",
+    "charset": "utf8"
+  }
+}

@@ -1,0 +1,34 @@
+@import '../vendor/toastr/toastr.scss';
+
+#toast-container {
+    bottom: 2%;
+    z-index: 10;
+
+    > .toast {
+        background-image: none !important;
+        @include shadow;
+
+        &:before {
+            position: fixed;
+            font-family: FontAwesome;
+            font-size: 24px;
+            line-height: 18px;
+            float: left;
+            color: #FFF;
+            padding-right: 0.5em;
+            margin: auto 0.5em auto -1.5em;
+        }
+
+        &:hover {
+            @include shadow(2);
+        }
+    }
+
+    > .toast-info {
+        background-color: $red;
+        opacity: 1;
+        &:before {
+            content: "\f01c";
+        }
+    }
+}

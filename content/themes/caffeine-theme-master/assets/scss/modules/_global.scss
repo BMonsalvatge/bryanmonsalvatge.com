@@ -1,0 +1,306 @@
+// ------------------------------
+// BASICS
+// ------------------------------
+html {
+    font-size: $unit;
+}
+
+html,
+body {
+    height: 100%;
+    min-height: 100%;
+
+    &.expanded {
+        overflow-y: hidden;
+    }
+}
+
+body {
+    font-family: $sans-font-fallback;
+    color: $gray-darker;
+    background: $gray-lighter;
+}
+
+.fonts-loaded body {
+    font-family: $sans-font;
+}
+
+mark {
+    background: saturate($primary-color, 60%);
+}
+
+::selection {
+    background: lighten($primary-color, 26%);
+}
+
+::scrollbar {
+    display: none;
+}
+
+// ------------------------------
+// TYPOGRAPHY
+// ------------------------------
+a {
+    position: relative;
+    text-decoration: none;
+    color: $link-color;
+    @extend .animated;
+    &:hover {
+        color: $hover-color;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $serif-font-fallback;
+    -webkit-font-smoothing: antialiased;
+    font-weight: lighter;
+    color: $gray-darkest;
+}
+
+.fonts-loaded h1,
+.fonts-loaded h2,
+.fonts-loaded h3,
+.fonts-loaded h4,
+.fonts-loaded h6 {
+    font-family: $serif-font;
+}
+
+h1 {
+    margin: $margin-h1 0;
+    font-size: $font-h1;
+    line-height: 48px;
+}
+
+h2 {
+    margin: $margin-h2 0;
+    font-size: $font-h2;
+}
+
+h3 {
+    margin: $margin-h3 0;
+    font-size: $font-h3;
+}
+
+h4 {
+    margin: $margin-h4 0;
+    font-size: $font-h4;
+}
+
+h5 {
+    margin: $margin-h5 0;
+    font-size: $font-h5;
+}
+
+h6 {
+    margin: $margin-h6 0;
+    font-size: $font-h6;
+}
+
+p {
+    margin-bottom: 20px;
+    line-height: 26px;
+    font-size: 90%;
+    word-wrap: break-word;
+
+    > code {
+        @include inline-code-style;
+    }
+}
+.fonts-loaded p{
+    font-size: 100%;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+blockquote {
+    > p {
+        margin: 40px 48px;
+        font-family: $quote-font;
+        font-size: 18px;
+        -webkit-font-smoothing: antialiased;
+        font-style: italic;
+        text-align: center;
+        word-wrap: break-word;
+    }
+}
+
+// ------------------------------
+// BASIC STYLING
+// ------------------------------
+ol,
+ul {
+    margin: 0 0 20px 40px;
+    li {
+        margin: 0 0 4px 0;
+        line-height: 25px;
+    }
+    ol,
+    ul {
+        margin: 2px 0 4px 32px;
+    }
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+li > code {
+    @include inline-code-style;
+}
+
+pre {
+    padding: 16px 2.5%;
+    margin-bottom: 20px;
+    font-family: $code-font;
+    font-size: 14px;
+    font-weight: $font-weight-normal;
+    line-height: 20px;
+    word-wrap: break-word;
+    color: $gray-dark;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    > code {
+        font-family: $code-font;
+        font-size: 12px;
+        color: $gray-dark;
+        white-space: pre-wrap;
+    }
+}
+
+code:hover,
+pre:hover {
+    color: $gray-darkest;
+}
+
+iframe {
+    width: 100%;
+    min-height: 500px;
+}
+
+.clear {
+    clear: both;
+}
+
+.block-heading {
+    position: relative;
+    bottom: -15px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    @include column(12);
+}
+
+.label {
+    padding: 8px 18px 9px;
+}
+
+.transparent {
+    opacity: 0;
+}
+
+// ------------------------------
+// MAIN LAYOUT
+// ------------------------------
+.container {
+    position: relative;
+    width: $total-width - $gutter-width;
+    margin: 0 auto;
+}
+
+main {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    > .content {
+        > h1 {
+            margin-bottom: 42px;
+        }
+        > footer {
+            margin-top: 20px;
+            display: block;
+            padding: 32px 0 0;
+            font-size: 12px;
+            color: lighten($gray-dark, 10%);
+            text-align: center;
+        }
+    }
+}
+
+.home-template {
+    .blog-header {
+        opacity: 0;
+    }
+}
+
+.material-cover {
+    height: $aside-height-collapsed;
+    width: 100%;
+    text-align: center;
+    background: #222 no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+    margin-bottom: -80px;
+    @include background-filter;
+
+    &.no-cover {
+        visibility: hidden;
+    }
+
+    .background-container {
+        height: 100%;
+        width: 100%;
+        @include background-filter;
+    }
+}
+
+.copyright {
+    display: block;
+    margin-bottom: 12px;
+    a {
+        text-decoration: underline;
+        color: lighten($gray-dark, 5%);
+        &:hover {
+            color: $hover-color;
+        }
+    }
+}
+
+.divider {
+    margin: 10px auto;
+    border-top: 1px solid $divider-color;
+    &.long {
+        width: 30%;
+    }
+    &.short {
+        width: 15%;
+    }
+}
+
+hr {
+    border: none;
+}
+
+.hide {
+    display: none;
+}

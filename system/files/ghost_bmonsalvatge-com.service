@@ -1,0 +1,14 @@
+[Unit]
+Description=Ghost systemd service for blog: bmonsalvatge-com
+Documentation=https://docs.ghost.org
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/ghost
+User=999
+Environment="NODE_ENV=production"
+ExecStart=/usr/bin/node /usr/bin/ghost run
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

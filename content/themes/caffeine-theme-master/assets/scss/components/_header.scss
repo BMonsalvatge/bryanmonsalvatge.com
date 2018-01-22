@@ -1,0 +1,58 @@
+.nav-header {
+    width: 100%;
+    z-index: 10;
+    padding-top: 10px;
+
+    a {
+        z-index: 10;
+        left: 20px;
+
+        &.right {
+            float: right;
+            left: auto;
+            right: 20px;
+        }
+
+        i {
+            position: relative;
+            font-size: 20px;
+            color: $slate-white;
+            background: $primary-color;
+            border: 2px solid $slate-white;
+            border-radius: 50%;
+            padding: 12px;
+            @include shadow(2);
+            @extend .animated;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &.fa-close {
+                font-size: 30px;
+                box-shadow: none;
+                background: initial;
+                border: none;
+            }
+        }
+
+        img {
+            max-width: 45px;
+            border: 2px solid $slate-white;
+            @include shadow(2);
+
+            &.avatar {
+                border: 2px solid $primary-color;
+            }
+        }
+
+    }
+
+    &.nav-header-fixed {
+        position: fixed;
+    }
+
+    &.mobile {
+        display: none;
+    }
+}

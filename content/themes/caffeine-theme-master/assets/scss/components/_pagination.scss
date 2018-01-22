@@ -1,0 +1,42 @@
+.pagination {
+    margin: 40px 0;
+    text-align: center;
+
+    &.post-related{
+        margin: 0 auto;
+        max-width: $container-medium-width;
+        padding-top: 30px;
+
+        #prev-btn {
+            float: left;
+        }
+
+        #next-btn {
+            float: right;
+        }
+
+        .btn {
+            border: none;
+            padding: 0;
+            text-transform: uppercase;
+            color: $slate-gray;
+
+            i {
+                color: white;
+                font-size: 12px;
+                vertical-align: middle;
+                padding: 5px;
+                background: $slate-gray;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .index {
+        margin-right: 16px;
+        margin-left: 16px;
+        font-size: 12px;
+        color: $gray-dark;
+        display: inline;
+    }
+}
