@@ -1,13 +1,35 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import ExperienceSection from '../components/ExperienceSection'
+import ProjectsSection from '../components/ProjectsSection'
+import About from '../components/Sidebar/About'
+import Links from '../components/Sidebar/Links'
+
+import './style.scss'
 
 const IndexPage = () => (
-  <div>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
-  </div>
+    <div className="index">
+      <div className="main">
+        <h5>
+          Hi, I'm <span className="bold">Bryan Monsalvatge</span>
+        </h5>
+
+        <h3 className="bold">
+          DevOps engineer passionate about Development, Automation, and Administration.
+        </h3>
+
+        <ExperienceSection />
+        <ProjectsSection />
+      </div>
+
+      <div className="aside">
+        <div className="top">
+          <About />
+        </div>
+        <div className="bottom">
+          <Links />
+        </div>
+      </div>
+    </div>
 )
 
 export default IndexPage

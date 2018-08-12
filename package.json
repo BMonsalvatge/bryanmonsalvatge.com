@@ -1,29 +1,26 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
-  "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
-  "dependencies": {
-    "gatsby": "^1.9.247",
-    "gatsby-link": "^1.6.40",
-    "gatsby-plugin-react-helmet": "^2.0.10",
-    "react-helmet": "^5.2.0"
+  "name": "gatsby-starter-2column-portfolio",
+  "description": "Gatsby 2 Column Portfolio Starter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BMonsalvatge/bryanmonsalvatge.com"
   },
-  "keywords": [
-    "gatsby"
-  ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write 'src/**/*.js'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gatsby build",
+    "serve": "gatsby serve"
   },
-  "devDependencies": {
-    "prettier": "^1.12.0"
-  },
-  "repository": {
-    "type" : "git",
-    "url" : "https://github.com/gatsbyjs/gatsby-starter-default"
+  "dependencies": {
+    "flexboxgrid": "^6.3.1",
+    "font-awesome": "^4.7.0",
+    "gatsby": "^1.9.238",
+    "gatsby-link": "^1.6.39",
+    "gatsby-plugin-google-analytics": "^1.0.24",
+    "gatsby-plugin-google-fonts": "0.0.4",
+    "gatsby-plugin-sass": "^1.0.23",
+    "include-media": "^1.4.9",
+    "milligram-scss": "^1.3.0",
+    "react-helmet": "^5.2.0"
   }
 }

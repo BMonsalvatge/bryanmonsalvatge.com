@@ -1,44 +1,58 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import get from 'lodash/get'
 
-import Header from '../components/header'
-import './index.css'
+import './style.scss'
 
-const Layout = ({ children, data }) => (
-  <div>
-    <Helmet
-      title={data.site.siteMetadata.title}
-      meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
-      ]}
-    />
-    <Header siteTitle={data.site.siteMetadata.title} />
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '0px 1.0875rem 1.45rem',
-        paddingTop: 0,
-      }}
-    >
-      {children()}
-    </div>
-  </div>
-)
+import profileImage from '../assets/images/profile.jpg'
+import favicon16 from '../assets/favicons/favicon-16x16.png'
+import favicon32 from '../assets/favicons/favicon-32x32.png'
 
-Layout.propTypes = {
-  children: PropTypes.func,
+class TemplateWrapper extends React.Component {
+  render () {
+    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
+    const siteKeywords = get(this, 'props.data.site.siteMetadata.keywords')
+    const siteURL = get(this, 'props.data.site.siteMetadata.url')
+    const siteDescription = get(this, 'props.data.site.siteMetadata.description')
+
+    const { children } = this.props
+
+    return (
+      <div className="template-wrapper">
+        <Helmet
+          title={siteTitle}
+          meta={[
+            { name: 'description', content: siteDescription },
+            { name: 'keywords', content: siteKeywords },
+            { property: 'og:url', content: siteURL },
+            { property: 'og:image', content: profileImage },
+            { property: 'og:title', content: siteTitle },
+            { property: 'og:description', content: siteDescription },
+          ]}
+          link={[
+            { rel: 'icon', type: 'image/png', sizes: '16x16', href: favicon16 },
+            { rel: 'icon', type: 'image/png', sizes: '32x32', href: favicon32 }
+          ]}
+        />
+        <div className="template-wrapper-children">
+          { children() }
+        </div>
+      </div>
+    )
+  }
 }
 
-export default Layout
+export default TemplateWrapper
 
-export const query = graphql`
-  query SiteTitleQuery {
+export const pageQuery = graphql`
+  query IndexQuery {
     site {
       siteMetadata {
         title
+        description
+        url
+        keywords
       }
     }
   }
