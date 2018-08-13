@@ -3,14 +3,15 @@ phases:
  install:
   commands:
     - echo "install step"
+    - npm install -g gatsby
  pre_build:
   commands:
     - echo "pre_build step"
     - npm install
-    - gatsby build
  build:
   commands:
-    - aws s3 sync --delete ./public/ "s3://bryanmonsalvatge-com"
+    - npm run build
  post_build:
   commands:
+    - aws s3 sync --delete "./public/" "s3://bryanmonsalvatge-com" --acl "public-read"
     - echo "post_build step"
