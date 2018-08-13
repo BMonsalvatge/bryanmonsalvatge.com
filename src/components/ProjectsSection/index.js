@@ -3,8 +3,6 @@ import Section from '../Section'
 import ExperienceUnit from '../ExperienceUnit'
 
 import githubLogo from '../../assets/images/projects/githublogo.svg'
-import littleNomadLogo from '../../assets/images/projects/little-nomad.png'
-import walkthroughViewGif from '../../assets/images/projects/wvwalkthroughview-optimize.gif'
 
 class ProjectsSection extends React.Component {
   render() {

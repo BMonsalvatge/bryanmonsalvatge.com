@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+ install:
+  commands:
+    - echo "install step"
+ pre_build:
+  commands:
+    - echo "pre_build step"
+    - yarn install
+ build:
+  commands:
+    - aws s3 sync --delete . "s3://bryanmonsalvatge-com"
+ post_build:
+  commands:
+    - echo "post_build step"
