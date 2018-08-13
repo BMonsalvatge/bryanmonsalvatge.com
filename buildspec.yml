@@ -6,10 +6,11 @@ phases:
  pre_build:
   commands:
     - echo "pre_build step"
-    - yarn install
+    - npm install
+    - gatsby build
  build:
   commands:
-    - aws s3 sync --delete . "s3://bryanmonsalvatge-com"
+    - aws s3 sync --delete ./public/ "s3://bryanmonsalvatge-com"
  post_build:
   commands:
     - echo "post_build step"
