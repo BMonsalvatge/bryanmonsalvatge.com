@@ -12,6 +12,7 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.2.0",
     "flexboxgrid": "^6.3.1",
     "font-awesome": "^4.7.0",
     "gatsby": "^1.9.238",

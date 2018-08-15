@@ -35,10 +35,31 @@ $margin-bottom: 40px;
     line-height: 2.8rem;
     font-size: 1.8rem;
 
-    .emoji {
-      font-size: 1.6rem;
-      padding-top: 30px;
+    .navlinks {
+      
+      ul.navitems {
+        list-style-type:none;
+        list-style-position: inside;
+        margin:0;
+        padding:0;
+        padding-bottom: 1cm;
+      }
 
+      .navitems li a, .navitems li a:visited {
+        padding:2px;font-family: 'Roboto Condensed', sans-serif;
+        font-size:22px;
+        color:#FFF;
+        text-align:center;
+        text-decoration:none;
+      }
+      
+      .navitems li a:hover {
+        color: gray;
+      }
+      
+      font-size: 3rem;
+      padding-top: 30px;
+      
       @include media("retina2x") {
         font-size: 2.2rem;
       }
@@ -47,7 +68,7 @@ $margin-bottom: 40px;
 
   @include media('>small', '<=medium') {
     .bio {
-      .emoji {
+      .navlinks {
         font-size: 2.0rem;
         padding-top: 10px;
       }
@@ -59,7 +80,7 @@ $margin-bottom: 40px;
       line-height: 2.0rem;
       font-size: 1.4rem;
 
-      .emoji {
+      .navlinks {
         font-size: 1.8rem;
         padding-top: 10px;
       }

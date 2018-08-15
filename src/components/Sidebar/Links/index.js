@@ -24,6 +24,16 @@ class Links extends Component {
             </a>
           </li>
           <li className="icon">
+            <a href="https://medium.com/@bryanmonsalvatge" target="_blank">
+              <i className="fa fa-medium"></i>
+            </a>
+          </li>
+          <li className="icon">
+            <a href="https://www.youtube.com/c/RockinouttCoding" target="_blank">
+              <i className="fa fa-youtube"></i>
+            </a>
+          </li>
+          <li className="icon">
             <a href="mailto:bryanmonsalvatge@gmail.com" target="_blank">
               <i className="fa fa-envelope"></i>
             </a>
