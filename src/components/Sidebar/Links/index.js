@@ -24,7 +24,7 @@ class Links extends Component {
             </a>
           </li>
           <li className="icon">
-            <a href="https://medium.com/@bryanmonsalvatge" target="_blank">
+            <a href="https://medium.com/bryanmonsalvatge" target="_blank">
               <i className="fa fa-medium"></i>
             </a>
           </li>

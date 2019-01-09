@@ -13,7 +13,7 @@ class About extends Component {
           Checkout my Medium blog and YouTube channel below.
           <div className="navlinks">
             <ul className="navitems">
-              <li><a href="https://medium.com/@bryanmonsalvatge">Blog</a></li>
+              <li><a href="https://medium.com/bryanmonsalvatge">Blog</a></li>
               <li><a href="https://www.youtube.com/c/RockinouttCoding">Videos</a></li>
             </ul>
           </div>
