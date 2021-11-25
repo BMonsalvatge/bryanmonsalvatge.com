@@ -1,12 +1,11 @@
 ---
-name: Tails Azimuth
+name: Bryan Monsalvatge
 avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
-email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+occupation: DevOps Engineer
+email: BryanMonsalvatge@gmail.com
+twitter: https://twitter.com/BMonsalvatge
+linkedin: https://www.linkedin.com/in/bryan-monsalvatge
+github: https://github.com/BMonsalvatge
 ---
 
 Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.

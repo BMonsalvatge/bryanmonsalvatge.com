@@ -1,0 +1,139 @@
+---
+title: Making a Simple Serverless GatsbyJS Website with Continuous Delivery
+date: '2018-09-03'
+tags: ['GatsbyJS', 'AWS', 'CI/CD', 'DevOps', Serverless]
+draft: false
+summary: A quick tutorial on getting a GatsbyJS website built, with CD pipeline onto AWS.
+images: ['https://miro.medium.com/max/700/0*T9HHnWZhYC8dcb9S']
+layout: PostLayout
+---
+
+<figure class="float-center">
+	<img src="https://miro.medium.com/max/700/0*T9HHnWZhYC8dcb9S" alt="silver iMac turned on inside room” by Lee Campbell on Unsplash">
+</figure>
+
+So up until recently I had been using a [Ghost ](https://ghost.org/)website hosted on a small VPS from [Linode](https://www.linode.com/) for my portfolio site. Since it was a very small VM Nginx would occasionally crash. Rather than trying to fix that I decided to redo my website and make it “Serverless”.
+
+## Step 1: Picking the Stuff
+
+So to start I had already decided that I wanted to host my website on [Amazon S3](https://aws.amazon.com/s3/) and that I just wanted to keep it static for now (Not tying in API Gateway or Lambda). Additionally I wanted to use React somehow and picked [GatsbyJS](https://www.gatsbyjs.org/) as a framework in order to generate static content from my React project. GatsbyJS has a list of [starter templates](https://www.gatsbyjs.org/docs/gatsby-starters/) to pick from and since I didn’t want to recreate the wheel I chose [this one](https://github.com/praagyajoshi/gatsby-starter-2column-portfolio). Now I just needed a way to get my GatsbyJS built static content up to S3. I decide to use [AWS CodePipeline](https://aws.amazon.com/codepipeline/) and [AWS CodeBuild](https://aws.amazon.com/codebuild/) since it integrated fairly easily with S3 + [my Github repo](https://github.com/BMonsalvatge/bryanmonsalvatge.com).
+
+So for those who like lists here’s what I’ll be using:
+
+1. AWS S3
+
+2. AWS CodePipeline
+
+3. AWS CodeBuild
+
+4. AWS CloudFront
+
+5. GatsbyJS
+
+## Step 2: GatsbyJS
+
+So before we start diving into the AWS stuff else let’s get GatsbyJS setup. It’s fairly straightforward and I recommend [https://www.gatsbyjs.org/docs/](https://www.gatsbyjs.org/docs/) for their Getting Started guide.
+
+For us we’ll pick a starter and run the following command to setup our new site locally:
+
+gatsby new mysite [https://github.com/praagyajoshi/gatsby-starter-2column-portfolio](https://github.com/praagyajoshi/gatsby-starter-2column-portfolio)
+
+We can then test our new site by running a running gatsby develop inside of our newly created directory
+
+cd mysite && gatsby develop
+
+Once that’s done you should be able to view the starter from the default link of localhost:8000
+
+Once you have this working you can make all your code changes locally and test using the gatsby develop command. Once you have your site setup the way you want it we can now start getting our AWS components setup.
+
+## Step 3: AWS S3
+
+So if you haven’t already, sign up for an [AWS account](https://aws.amazon.com/free/?sc_channel=PS&sc_campaign=acquisition_US&sc_publisher=google&sc_medium=ACQ-P%7CPS-GO%7CBrand%7CSU%7CCore%7CCore%7CUS%7CEN%7CText&sc_content=Brand_Account_bmm&sc_detail=%2Baws%20%2Baccount&sc_category=core&sc_segment=280392801059&sc_matchtype=b&sc_country=US&sc_kwcid=AL!4422!3!280392801059!b!!g!!%2Baws%20%2Baccount&s_kwcid=AL!4422!3!280392801059!b!!g!!%2Baws%20%2Baccount&ef_id=WDjixwAAAFpMDyYA:20180903232411:s). This will require a credit card, but most of what we’ll be covering here runs me a little over 50 cents a month. **Just make sure to setup a budget and billing alerts in AWS to avoid unexpected costs!**
+
+Once in the AWS Console go to the S3 service: Services → Storage → S3
+
+From there let’s create a bucket. You can call it whatever you want, however it must be unique (not in use by anyone else). After that bucket is created click into it and go to the bucket properties tab. Select the box to enable static website hosting, and set the index / error document to index.html and error.html respectively.
+
+Make note of the s3 endpoint as we’ll need it when setting up our CloudFront distribution.
+
+## Step 4: AWS CodePipeline + CodeBuild
+
+Setting up CodePipeline for our purposes will be a pretty straightforward process. Start off by going to the CodePipeline dashboard and selecting get started, or create pipeline.
+
+1. Give your pipeline a name.
+
+1. For this one our source will be Github.
+
+1. Once selected as a source you’ll need to connect your Github account.
+
+1. Then select your repository and select your branch (I use [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) so I have my builds go out to production from my master branch.).
+
+1. Now for our build provider we’re going to select AWS CodeBuild.
+
+1. Since this is a new project we will select “Create a new build project” and give it a name.
+
+1. For the Environment, we’ll use a CodeBuild managed image for Ubuntu with the Node.js 10.1.0 runtime / version (At the time of writing).
+
+1. For “Build specification” you can insert the build commands there, but I am more of a fan of using a buildspec.yml in my git repo’s source directory. More on that later.
+
+1. Next let AWS CodeBuild create the service role for you and give it a name.
+
+1. Then hit “Save Build Project” and go to the next step.
+
+1. We’re going to be doing our deploy through CodeBuild so we can skip the Deploy step.
+
+1. And If you have not setup a AWS service role before, you’ll need to create one in this next step. Just give it a name, hit create role and next!
+
+Now that we have our CodePipeline setup, next we will need to add that buildspec.yml to our GatsbyJS project. An example of what I am currently using can be found below.
+
+<iframe src="https://medium.com/media/9dd5971f53c185831dbe541c0b1b888d" frameborder=0></iframe>
+
+## Step 5: Testing It Out
+
+Now that we have all that setup and committed to our git repository. As soon as we push that buildspec.yml to our master branch (or whichever branch you selected in the CodePipeline step), our pipeline should start. We can check the status of this by going to the CodePipeline dashboard. Once you see both steps return a success message, paste your S3 endpoint from Step 2 into your browser and your site should load!
+
+## Step 6: CloudFront (Optional)
+
+Now some of you (like me) will want an SSL certificate for their website, however there is no current way to bind an SSL certificate directly to a S3 bucket. So for this I’ll be using [AWS CloudFront](https://aws.amazon.com/cloudfront/). CloudFront is a CDN where we can use our S3 bucket as an origin for serving data to all, or some, of the AWS edge locations. This “distribution” also allows us to bind an SSL certificate to it using [AWS ACM](https://aws.amazon.com/certificate-manager/).
+
+First let’s generate our certificate (for this you will need a domain from somewhere).
+
+1. Go to the AWS Certificate Manager dashboard, located in the AWS console.
+
+1. The click on getting started or, request a certificate.
+
+1. We’ll be requesting a public certificate, so hit next.
+
+1. Then type in the domain name you’ll be using for your website. You will want to include both the www and non-www versions. You can do this by clicking the “Add another name to this certificate” box. Once that is done hit next.
+
+1. For Validation, you’ll want to use DNS validation unless you have email setup for your domain. But pick whichever method you prefer.
+
+1. Then next through the remain steps.
+
+1. If you chose the DNS validation method you’ll need to add the supplied txt record to your domain inside of your name server (usually found in your DNS registrar’s control panel). Once that is added, allow some time for DNS to propagate then check back on the AWS certificate manager status to see if its issue.
+
+Once the certificate has been issued let’s move on to creating our CloudWatch distribution.
+
+1. Go to the CloudFront dashboard and click on “Getting Started” or “Create Distribution”
+
+1. We’ll be creating a Web distribution, so let’s select that.
+
+1. For the “Origin Domain Name” paste in your AWS S3 endpoint. Don’t just select your bucket from the drop down.
+
+1. Our origin path can just be /
+
+1. Our Origin ID can be basically whatever works for identifying our distribution. domain-com should work.
+
+1. Since we don’t want people viewer our site through HTTP let’s select “Redirect HTTP to HTTPS” in the viewer protocol policy.
+
+1. Go down to the “SSL Certificate” section and click on “Custom SSL Certificate” then in the box select our Amazon certificate we were issued earlier.
+
+1. Everything else can be left default!
+
+Now that this distribution is setup (It’ll be pending for a bit) we can go to our DNS and create a CNAME and point it to our CloudFront domain name, which will look like a bunch of gibberish followed by “.cloudfront.net”.
+
+## That’s It
+
+I hope you found this tutorial helpful, and hopefully versatile enough to apply to some different web frameworks.
+
+From here I hope to continually add to this tutorial (plus make a video going over this subject), as I expand my own website. If you have any feedback, questions, or comments let me know here, or [follow me on Twitter.](https://twitter.com/BMonsalvatge)
