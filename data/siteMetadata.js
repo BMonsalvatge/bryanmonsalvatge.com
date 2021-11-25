@@ -1,8 +1,8 @@
 const siteMetadata = {
-  title: 'Blog by Bryan Monsalvatge',
+  title: 'Bryan Monsalvatge',
   author: 'Bryan Monsalvatge',
-  headerTitle: "Bryan Monsalvatge's Blog",
-  description: 'A blog for mostly tech and some miscellaneous topics',
+  headerTitle: 'Bryan Monsalvatge',
+  description: 'A blog for mostly tech, but some miscellaneous topics',
   language: 'en-us',
   siteUrl: 'https://bryanmonsalvatge.com',
   siteRepo: 'https://github.com/BMonsalvatge/bryanmonsalvatge.com',
