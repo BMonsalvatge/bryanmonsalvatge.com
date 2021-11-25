@@ -1,6 +1,6 @@
 ---
 name: Bryan Monsalvatge
-avatar: /static/images/avatar.png
+avatar: /static/images/avatar.jpg
 occupation: DevOps Engineer
 email: BryanMonsalvatge@gmail.com
 twitter: https://twitter.com/BMonsalvatge
