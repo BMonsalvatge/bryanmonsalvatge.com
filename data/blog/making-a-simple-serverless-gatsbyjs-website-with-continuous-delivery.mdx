@@ -86,8 +86,6 @@ Setting up CodePipeline for our purposes will be a pretty straightforward proces
 
 Now that we have our CodePipeline setup, next we will need to add that buildspec.yml to our GatsbyJS project. An example of what I am currently using can be found below.
 
-<iframe src="https://medium.com/media/9dd5971f53c185831dbe541c0b1b888d" frameborder=0></iframe>
-
 ## Step 5: Testing It Out
 
 Now that we have all that setup and committed to our git repository. As soon as we push that buildspec.yml to our master branch (or whichever branch you selected in the CodePipeline step), our pipeline should start. We can check the status of this by going to the CodePipeline dashboard. Once you see both steps return a success message, paste your S3 endpoint from Step 2 into your browser and your site should load!
