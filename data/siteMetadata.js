@@ -8,7 +8,7 @@ const siteMetadata = {
   siteRepo: 'https://github.com/BMonsalvatge/bryanmonsalvatge.com',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
-  socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/logo.png',
   email: 'BryanMonsalvatge@gmail.com',
   github: 'https://github.com/BMonsalvatge',
   twitter: 'https://twitter.com/BMonsalvatge',
