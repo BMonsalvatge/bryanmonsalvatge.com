@@ -1,0 +1,118 @@
+---
+title: Adding Items to a list in SwiftUI
+date: '2020-02-04'
+tags: ['iOS', 'Swift', 'Mobile Development']
+draft: false
+summary: A quick way of getting user input and adding data to a list in SwiftUI.
+images: ['/static/images/listitems-ios.png']
+layout: PostLayout
+---
+
+![ListItems iOS](/static/images/listitems-ios.png)
+
+## The Problem
+
+Recently I've been working on an iOS app. After staring at my recently written, perfectly good UIKit code, I decided to scrap it all and try out the shiney new toy that is [SwiftUI](https://developer.apple.com/xcode/swiftui/). All was going well until I added my plus icon in the top right of my navbar in hopes to get user input. That's when I realized that an alert or anything equivalent to a normal popup in UIKit could **not** have a TextField for user input. I spent far too long trying to figure out if there was some other way to do this fairly normal task in SwiftUI, and was too stubborn to use UIKit at this point(since you can use UIKit code and SwiftUI side by side). After looking at other apps and seeing what other types of options SwiftUI provides for some sort of popup view, I finally landed on using the `.sheet` attribute on my `NavigationView`.
+
+## Example
+
+Below I am going to list out an example of how I did this and hopefully how you can use it in your own code. This will be a simple navigation view, with a plus button in the topright of the navbar, that will present us with a view that can take some input from the user and then add it to the list... Without further ador...
+
+### List Item
+
+```swift
+struct Item: Hashable {
+    let name: String
+    let color: UIColor
+}
+```
+
+The above is pretty straight forward. We create a struct that will take a name and color as its properties.
+
+### ContentView State Variables
+
+```swift
+    @State var listItems = [Item]()
+
+    @State var addItemName: String = ""
+
+    @State var colorSelection: UIColor = UIColor.systemRed
+
+    @State var addItem = false
+```
+
+Here we setup some sub-parly named variables that are going to help us control our view.
+
+- `listItems` - This is going to be an array of objects based on the `Item` struct we created previously.
+- `addItemName` - This will store the string that our user inputs for the Item's name.
+- `colorSelection` - This will store a color picked by our user when they hit the plus button.
+- `addItem` - This is just storing a true false value to help us present our `.sheet` view.
+
+### ContentView
+
+```swift
+var body: some View {
+    ZStack {
+            VStack {
+                NavigationView {
+                    List {
+                        ForEach(listItems, id: \.self) { item in
+                            Text(item.name).listRowBackground(Color(item.color))
+                        }
+                    }
+                        .navigationBarTitle(Text("List Items"))
+                        // Adds the plus button to our navbar
+                        .navigationBarItems(trailing:
+                            Button(action: {
+                                // toggles the value of our bool from false to true,
+                                // which will present our sheet.
+                                self.addItem.toggle()
+                            }, label: {
+                                Image(systemName: "plus")
+                            })
+
+                    )
+                // This is our secondary view that'll take in our user's input.
+                // Is presented when addItem is set to true.
+                }.sheet(isPresented: $addItem) {
+                    VStack {
+                        HStack {
+                            Text("Item Name: ")
+                            TextField("Add an Item", text: self.$addItemName)
+                        }
+                        // A simple picker that gives our user some different selections of color.
+                        Picker(selection: self.$colorSelection, label: Text("Select a Color")) {
+                            Text("Red").tag(UIColor.systemRed)
+                            Text("Blue").tag(UIColor.systemBlue)
+                            Text("Green").tag(UIColor.systemGreen)
+                            Text("Yellow").tag(UIColor.systemYellow)
+                        }
+                        // Button that will submit our data to the list and reset our user selected
+                        // variables for when then add another item.
+                        Button(action: {
+                            self.listItems.append(Item(name: self.addItemName, color: self.colorSelection))
+
+                            // This will close our sheet view when the user click our Add button.
+                            self.addItem.toggle()
+
+                            // Reset Values
+                            self.addItemName = ""
+                            self.colorSelection = UIColor.systemRed
+                        }, label: {
+                            Text("Add")
+                        })
+                    }.padding(100)
+                }
+
+        }
+    }
+}
+```
+
+This part is a bit tougher to break apart, so I've added comments above to help explain the code.
+
+## Sample Code - Github link
+
+Find the full project on Github! https://github.com/BMonsalvatge/SwiftUI-UserData-To-List
+
+Feel free to submit a PR or fork it if you feel like there's a better way to achieve this. I feel as if I've been mostly scratching the surface of SwiftUI. Any feedback is appreciated!

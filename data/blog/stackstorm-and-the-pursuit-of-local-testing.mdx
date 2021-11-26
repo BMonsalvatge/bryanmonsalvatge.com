@@ -1,0 +1,97 @@
+---
+title: Stackstorm and The Pursuit of Local Testing
+date: '2019-08-10'
+tags: ['Automation', 'Python', 'DevOps', 'Stackstorm']
+draft: false
+summary: Local testing for writing custom Stackstorm actions in Python.
+images:
+  [
+    'https://images.unsplash.com/photo-1529661197280-63dc545366c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80',
+  ]
+layout: PostLayout
+---
+
+![Random Laptop](https://images.unsplash.com/photo-1529661197280-63dc545366c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80)
+
+## Stackstorm and Local Testing
+
+Recently I have been looking into improving existing automation within my organization. One general issue I've noticed was the lack of tooling to perform local testing for most things Ops related. In general it seems most developer tools have matured to a state where local testing a first class citizen among different frameworks and languages. For most Systems/Ops teams I've seen testing typically occur on live QA-type environments being used by multiple engineers, and departments, often causing conflicting or delayed work effort (since everyone is waiting on permission to use the environment). In order to minimize the effects of this I began to explore how we could get at least the majority of testing / trial and error off of those QA environments and onto our local machines.
+
+Later I may write up an article on [Stackstorm](https://stackstorm.com/), but today is not that day. For now I will mainly focus on how we're doing local testing while writing custom [Python](https://www.python.org/) actions.
+
+## Our Locally Testable Stackstorm Action
+
+Below is the python code and yaml file that will make up our [Stackstorm Action](https://docs.stackstorm.com/actions.html).
+
+### Our Python Code
+
+**my_action.py**
+
+```python
+import os
+import argparse
+
+# Our function that will be running whatever code we need.
+def our_function(environment, path="~/git-repo"):
+    print("Running something aganst the " + environment + " environment from " + path)
+
+try:
+    # Tries to import our stackstorm Action dependecies.  Will only work when running via Stackstorm.
+    from st2common.runners.base_action import Action
+
+    class MyAction(Action):
+
+        def run(self, environment, *args, **kwargs):
+            our_function(environment)
+# Since when locally testing the Stackstorm depencies won't import, pass on this known exception.
+except ImportError:
+    pass
+
+# If running the script directly, run our_function
+if __name__ == '__main__':
+    args = {}
+    args[...] = os.environ.get('...')
+    # Delcare the arguements you'll need for locally testing your functions.
+    parser = argparse.ArgumentParser(description="process variables for local testing.")
+    parser.add_argument("-e", "--environment", action="store", dest="environment",
+                        help="The environment name.")
+
+    # Assign those arguments to variables that match what will being passed via our action parameters.
+    args = {}
+    args = parser.parse_args()
+    environment = args.environment
+
+    # Run our functions for local testing.
+    our_function(environment, "./local_test")
+```
+
+This code will allow us to run our Action from the command line like so:
+`python3 my_action.py -e "qa"`
+
+The purpose of the path parameter was to give us an option for working within a git repo so that you can specify it when working locally (since it'll usually be in the same place always on your stackstorm instance). You could add another argument to argparse if you wanted to be able to specify it via the command line when running the action locally.
+
+In this scenario it would be a folder within our Stackstorm pack's root directory. Most of my [Packs](https://docs.stackstorm.com/packs.html#developing-a-pack) end up cloning or pulling an update from a git repo, so I usually have a folder within the project, git ignored, for the purpose of local testing. Typically I just name this folder `local_test`
+
+### Our Action Metadata File
+
+The Action metadata for this one is extremely straightforward, we're just taking in a parameter for the environment we will be running our code on.
+
+**my_action.yaml**
+
+```yaml
+name: 'my_action'
+runner_type: 'python-script'
+description: 'Runs some code on the specified environment'
+enabled: true
+entry_point: 'my_action.py'
+parameters:
+  environment:
+    type: 'string'
+    description: 'enviroment that the code should be ran on.'
+    required: true
+    position: 0
+```
+
+## Summary
+
+The above code gives us a way to test our individual actions locally and clear up the majority of issues we'd normally run into during testing on the Stackstorm instance itself. Granted there are some issues we may be unable to test properly on our local machine, but for the actions I've been currently writing I'd say this takes care of the vast majority of them.

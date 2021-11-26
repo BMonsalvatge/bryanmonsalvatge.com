@@ -1,0 +1,78 @@
+---
+title: Restarting the Blog
+date: '2019-07-22'
+tags: ['Serverless', 'iOS', 'General']
+draft: false
+summary: Why I remade my website, and some of the reasons why I will be writing the blog moving forward
+images:
+  [
+    'https://images.unsplash.com/photo-1455044372794-d981761b5bc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
+  ]
+layout: PostLayout
+---
+
+![Guy on Cliff](https://images.unsplash.com/photo-1455044372794-d981761b5bc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80)
+
+In short, I wanted to cover some of the reasons I remade my website, What I will be primarily writing about moving forward, and what I am hoping to get out of this experience.
+
+## Remaking The Website
+
+Previously I had used a [GatsbyJS](https://www.gatsbyjs.org/) starter in order to make my website. I didn't have much knowledge of GatsbyJS at the time, however I found it to be a pretty easy way to get a nice looking basic landing page that I thought would be easier to maintain. I was wrong about the maintenance part.
+
+I had left the site basically untouched for over a year and since then [GatsbyJS 2](https://www.gatsbyjs.org/blog/2018-09-17-gatsby-v2/) had come out, and the starter I used at the time had a lot of dependencies that were fairly out of date and therefore difficult to upgrade. I spent some time looking into updating those dependencies as well as adding a feature to it for the sake of writing blog posts and not relying on [Medium](https://medium.com/) (more on that later). After some review, and some interest into [Next.js](https://nextjs.org/) I decided that it may be a good idea to rewrite my blog in a new framework with less dependencies that were actually being maintained.
+
+After getting some basic things in Next.js working for reading markdown files, I concluded that Next.js, while a great framework I would like to use for a project later, was overkill for this project.
+
+### Back to GatsbyJS
+
+So here I am back to using GatsbyJS. I took a view at some starters that already had a blogging feature and stumbled upon this great [Github Project](https://github.com/alxshelepenok/gatsby-starter-lumen). The main thing that caught my eye on this was that it was being maintained well, and had a lot of built-in testing. While it had a fair bit more dependencies than I was looking for, the history of the project gave me some confidence in using it for the sake of this small blog. Additionally I wanted an opportunity to contribute back where I could (dark theme toggle incoming...).
+
+## So What's The Deal With Medium?
+
+The reason behind me not wanting to "rely" on medium has a few points.
+
+1. Having my own corner of the web.
+2. The Medium Paywall.
+3. SEO and Speed.
+
+### Having My Own Corner of the Web.
+
+There's just something about having your own little space on the web. While in some ways in requires more work, it's rewarding all the same. Additionally I find there to be a slight intimidation when writing to a platform like Medium. There's a constant thinking of what people may think, and feeling that the quality of the article needs to be to a certain level. Granted these concerns are self-placed. However with my own website I feel as if I have the permission to post things that may be short, not so great, off-topic, and even just primarily useful to myself. In short I have more permission to be myself.
+
+Also, more on Medium below, Medium has become crowded. When I post I am lost in a sea of other articles jarring for your attention. That sense of competition is out of sync with my goal of writing this blog and I think a primary component of why this change was neccessary.
+
+### The Medium Paywall
+
+Recently there have been some reports of issues with Medium and them turning their paywall on for articles without the knowledge of the poster. [FreeCodeCamp](https://www.freecodecamp.org/forum/t/we-just-launched-developer-news-heres-how-you-can-use-it/279929) posted about this and are moving off the platform due to it:
+
+> "As of 2019, Medium won’t give you much ‘distribution’ within their platform unless you’re willing to put your articles to be behind their paywall,” Larson said. “At the same time, if you do put your article behind their paywall, you’re limiting your readership to just the people who have the resources to pay. This is at odds with the goals of the freeCodeCamp community. We want to make these learning resources as widely available as possible."
+
+Others have written in more [detail](https://wptavern.com/freecodecamp-moves-off-of-medium-after-being-pressured-to-put-articles-behind-paywalls) of the controversy.
+
+I've had similar feelings to what was shared above about Medium's business model, and have been concerned about it in the past. One of the greatest things I've benefited from over my career is free and open source resources to learn from. Not that authors shouldn't have opportunities to make money from their work, however I've found that most blog writers can benefit from writing through other mediums (pun intended) rather than being directly compensated. By this we can still circulate free resources that ultimately advance the technology field at large and raise up others where our ceiling can be their floor.
+
+### SEO and Speed
+
+One of my dislikes about medium is just that it doesn't feel very fast. Below I have included a lighthouse test of one of my articles on Medium and then the same article on this website.
+
+Medium:
+![Lighthouse test via https://www.webpagetest.org/](../../static/media/medium-article-speedtest.png)
+
+bryanmonsalvatge.com:
+![Lighthouse test via https://www.webpagetest.org/](../../static/media/personalsite-article-speedtest.png)
+
+Of course a static site should perform better than whatever Medium is using in their backend, but luckily I don't have the needs of it.
+
+## Moving Forward and What I Hope to Gain
+
+I hope to keep up with my own self-challenge to write one article monthly. Preferably I am wanting to write on something I have learned over the past month while working on personal projects or things I've learned at work that I am able to share.
+
+By this I hope to gain a perspective on what I have completed, and left uncompleted, in the past. As well I hope it to be a form of accountability to complete those "uncompleted" projects I have started. And like most I hope this blog to be a networking tool to connect my work to other developers, dev ops engineers, and system administrator who share similar interests.
+
+### iOS Project
+
+This year I've challenged myself to create a daily journaling app in iOS, and I hope to have it beta testable (basic feature set complete) by the end of 2019. I will likely be streaming this process on my [Twitch.tv](https://www.twitch.tv/rockinoutt/) channel in case anyone is interested in stopping by. My goal is to post recaps from the stream into a blog format here, which will also serve as that whole perspective thing I was mentioning earlier.
+
+## Conclusion
+
+If you've made it this far, thank you for taking the time to read this article. I hope I've lived up to some of the points I've made since writing it. If you'd like to connect follow me on [Twitter](https://twitter.com/BMonsalvatge) or [Twitch.tv](https://www.twitch.tv/rockinoutt/).

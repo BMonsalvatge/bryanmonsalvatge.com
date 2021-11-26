@@ -8,8 +8,6 @@ linkedin: https://www.linkedin.com/in/bryan-monsalvatge
 github: https://github.com/BMonsalvatge
 ---
 
-Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.
+Bryan Monsalvatge is a DevOps engineer focusing primarily on AWS, Terraform, Ansible, automation and server management.
 
-He leads the clean energy group which develops 3D air pollution-climate models, writes differential equation solvers, and manufactures titanium plated air ballons. In his free time he bakes raspberry pi.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+At home he spends most of his time working on different side projects with Flutter, Web3 related technology, and learning Japanese via immersion learning methods (Thanks [Migaku](https://www.migaku.io/) and [Refold](https://refold.la/) teams!).
