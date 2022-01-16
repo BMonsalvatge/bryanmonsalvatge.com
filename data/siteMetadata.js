@@ -4,6 +4,7 @@ const siteMetadata = {
   headerTitle: 'Bryan Monsalvatge',
   description: 'A blog for mostly tech, but some miscellaneous topics',
   language: 'en-us',
+  theme: 'system', // system, dark or light
   siteUrl: 'https://bryanmonsalvatge.com',
   siteRepo: 'https://github.com/BMonsalvatge/bryanmonsalvatge.com',
   siteLogo: '/static/images/logo.png',
